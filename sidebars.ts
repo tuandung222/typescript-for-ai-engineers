@@ -78,6 +78,20 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
+      label: 'Phần 7: Case Study Gemini CLI',
+      link: {type: 'doc', id: '07-gemini-cli-case-study/01-architecture-map'},
+      collapsed: false,
+      items: [
+        '07-gemini-cli-case-study/01-architecture-map',
+        '07-gemini-cli-case-study/02-install-build-run',
+        '07-gemini-cli-case-study/03-reading-core-agent-loop',
+        '07-gemini-cli-case-study/04-tool-system-and-mcp',
+        '07-gemini-cli-case-study/05-terminal-ui-react-ink',
+        '07-gemini-cli-case-study/06-sdk-and-extension-patterns',
+      ],
+    },
+    {
+      type: 'category',
       label: 'Tài nguyên',
       collapsed: true,
       items: [

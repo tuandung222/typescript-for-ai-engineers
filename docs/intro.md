@@ -8,7 +8,7 @@ Bạn đến từ Python, quen với notebook, model training, data pipeline, ex
 
 Điều đáng mừng là TypeScript không xa lạ như vẻ ngoài của nó. Nếu Python giúp bạn suy nghĩ nhanh về dữ liệu và thuật toán, TypeScript giúp bạn xây hệ thống lớn với hợp đồng rõ hơn giữa các phần. TypeScript không thay thế Python trong machine learning. Nó bổ sung một năng lực khác: xây sản phẩm, SDK, UI, backend service, agent tool server và integration layer quanh AI.
 
-Giáo trình này dùng `docmost/docmost`, một ứng dụng wiki và documentation collaborative open source, làm tư liệu nghiên cứu. Docmost là ví dụ tốt vì nó không phải toy project. Nó có React frontend, NestJS backend, PostgreSQL, Redis, real-time collaboration, Docker, pnpm workspace và Nx monorepo. Nói cách khác, nó đủ gần với một sản phẩm thật để học cách tổ chức TypeScript trong production.
+Giáo trình này dùng hai open source project làm tư liệu nghiên cứu. **Docmost** (`docmost/docmost`) là ứng dụng wiki và documentation collaborative, đại diện cho pattern web app SaaS: React frontend, NestJS backend, PostgreSQL, Redis, Docker, pnpm workspace và Nx monorepo. **Gemini CLI** (`google-gemini/gemini-cli`, Apache 2.0) là AI agent chạy trên terminal, đại diện cho pattern AI tooling: agent loop, tool registry, MCP plugin system, React + Ink terminal UI, SDK package và esbuild bundling. Hai case study bổ sung nhau — Docmost dạy bạn cách tổ chức web app, Gemini CLI dạy bạn cách tổ chức AI agent.
 
 ## Mục tiêu của sách
 
@@ -28,4 +28,4 @@ Nếu bạn mới học TypeScript, hãy đọc Phần 0 đến Phần 2 trướ
 
 Nếu bạn đã biết JavaScript cơ bản nhưng chưa làm TypeScript nghiêm túc, hãy đọc Phần 1 và Phần 5 kỹ. Hai phần này giúp bạn chuyển từ viết code chạy được sang viết code có contract.
 
-Nếu bạn đang muốn trở thành software architect hoặc AI solution architect, hãy tập trung vào Phần 4 và Phần 6. Mục tiêu không phải chỉ biết syntax, mà là đọc được quyết định kiến trúc trong codebase thật.
+Nếu bạn đang muốn trở thành software architect hoặc AI solution architect, hãy tập trung vào Phần 4, Phần 6 và Phần 7. Phần 4 (Docmost) dạy pattern web app. Phần 7 (Gemini CLI) dạy pattern AI agent. Mục tiêu không phải chỉ biết syntax, mà là đọc được quyết định kiến trúc trong codebase thật.
