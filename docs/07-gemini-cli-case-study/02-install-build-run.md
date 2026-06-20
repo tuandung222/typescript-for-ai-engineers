@@ -4,7 +4,7 @@ title: 7.2 Cài đặt, build và chạy Gemini CLI
 
 # 7.2 Cài đặt, build và chạy Gemini CLI
 
-Ở bài trước, bạn đã thấy bản đồ kiến trúc. Bài này đi sâu vào build pipeline — cách Gemini CLI chuyển từ source `.ts` thành single file `bundle/gemini.js` mà `npx @google/gemini-cli` chạy được. Hiểu pipeline này giúp bạn biết cách một production TypeScript CLI được build, test và distribute.
+Ở bài trước, bạn đã thấy bản đồ kiến trúc. Bài này đi sâu vào build pipeline  -  cách Gemini CLI chuyển từ source `.ts` thành single file `bundle/gemini.js` mà `npx @google/gemini-cli` chạy được. Hiểu pipeline này giúp bạn biết cách một production TypeScript CLI được build, test và distribute.
 
 ## Cài đặt dependency
 
@@ -38,15 +38,15 @@ npm run bundle
 
 Đây là bước quan trọng nhất. `npm run bundle` thực hiện:
 
-1. `npm run generate` — generate file chứa git commit info
+1. `npm run generate`  -  generate file chứa git commit info
 2. Build devtools package
 3. Bundle browser-mcp cho core
-4. **`node esbuild.config.js`** — bundle chính
+4. **`node esbuild.config.js`**  -  bundle chính
 
 File `esbuild.config.js` (187 dòng) định nghĩa 3 build config:
 
 ```javascript
-// CLI bundle — sản phẩm chính
+// CLI bundle  -  sản phẩm chính
 const cliConfig = {
   ...baseConfig,
   entryPoints: { gemini: 'packages/cli/index.ts' },
@@ -160,4 +160,4 @@ npm run preflight
 
 ## Điều cần giữ lại
 
-Build pipeline của Gemini CLI cho thấy một pattern quan trọng cho AI engineer: **monorepo nhiều package nhưng distribute dưới dạng single artifact**. `esbuild` bundle mọi thứ thành 1 file, giúp `npx` chạy instant mà không cần install dependency tree. Khi bạn build AI tool hoặc AI agent CLI, pattern này (esbuild + ESM + code splitting) là reference tốt. Trong bài tiếp theo, ta sẽ đọc sâu vào agent loop — phần logic trung tâm mà mọi thứ khác wrap quanh.
+Build pipeline của Gemini CLI cho thấy một pattern quan trọng cho AI engineer: **monorepo nhiều package nhưng distribute dưới dạng single artifact**. `esbuild` bundle mọi thứ thành 1 file, giúp `npx` chạy instant mà không cần install dependency tree. Khi bạn build AI tool hoặc AI agent CLI, pattern này (esbuild + ESM + code splitting) là reference tốt. Trong bài tiếp theo, ta sẽ đọc sâu vào agent loop  -  phần logic trung tâm mà mọi thứ khác wrap quanh.

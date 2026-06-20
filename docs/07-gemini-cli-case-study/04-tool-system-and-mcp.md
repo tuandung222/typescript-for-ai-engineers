@@ -11,7 +11,7 @@ Tool system là phần phức tạp nhất của Gemini CLI core. Nó trả lờ
 Gemini CLI tách **định nghĩa tool** (tool là gì, schema ra sao) khỏi **lần gọi tool** (tool này với param này sẽ chạy thế nào). Đây là pattern Builder:
 
 ```typescript
-// ToolBuilder (định nghĩa tool) — tools.ts
+// ToolBuilder (định nghĩa tool)  -  tools.ts
 export interface ToolBuilder<TParams extends object, TResult extends ToolResult> {
   name: string;
   displayName: string;
@@ -24,7 +24,7 @@ export interface ToolBuilder<TParams extends object, TResult extends ToolResult>
   build(params: TParams): ToolInvocation<TParams, TResult>;
 }
 
-// ToolInvocation (lần gọi cụ thể) — tools.ts
+// ToolInvocation (lần gọi cụ thể)  -  tools.ts
 export interface ToolInvocation<TParams extends object, TResult extends ToolResult> {
   params: TParams;
   getDescription(): string;
@@ -75,7 +75,7 @@ export abstract class BaseToolInvocation<TParams extends object, TResult extends
 }
 ```
 
-`DeclarativeTool` là generic class. Mỗi tool cụ thể (ví dụ `ReadFileTool`) extends nó, định nghĩa schema cho params, và implement `build()` để tạo `ReadFileInvocation`. TypeScript generic đảm bảo type safety: `ReadFileTool.build()` nhận `ReadFileParams` và trả `ReadFileInvocation` — không có `any` hay `unknown` ở runtime.
+`DeclarativeTool` là generic class. Mỗi tool cụ thể (ví dụ `ReadFileTool`) extends nó, định nghĩa schema cho params, và implement `build()` để tạo `ReadFileInvocation`. TypeScript generic đảm bảo type safety: `ReadFileTool.build()` nhận `ReadFileParams` và trả `ReadFileInvocation`  -  không có `any` hay `unknown` ở runtime.
 
 ### ForcedToolDecision: Policy flow
 
@@ -91,7 +91,7 @@ Khi `shouldConfirmExecute()` được gọi, nó check policy engine trước. P
 
 ## ToolRegistry: Trung tâm quản lý tool
 
-File `tool-registry.ts` (809 dòng) triển khai `ToolRegistry` — registry chứa tất cả tool mà model có thể gọi:
+File `tool-registry.ts` (809 dòng) triển khai `ToolRegistry`  -  registry chứa tất cả tool mà model có thể gọi:
 
 ```typescript
 export class ToolRegistry {
@@ -181,7 +181,7 @@ Khi `discoverAllTools()` được gọi, registry chạy discovery command (subp
 MCP (Model Context Protocol) là protocol chuẩn cho tool discovery. Gemini CLI dùng `@modelcontextprotocol/sdk` để kết nối MCP server:
 
 ```typescript
-// mcp-client.ts — import từ MCP SDK
+// mcp-client.ts  -  import từ MCP SDK
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { SSEClientTransport } from '@modelcontextprotocol/sdk/client/sse.js';
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
@@ -259,7 +259,7 @@ Tool system của Gemini CLI dạy bạn 4 pattern thiết kế:
 
 **1. Builder pattern cho tool**: Tách `build()` (validate params) khỏi `execute()` (chạy logic). Khi model hallucinate param sai, `build()` throw error trước khi `execute()` chạy. Đây là defense-in-depth.
 
-**2. Registry pattern**: Một `Map<string, Tool>` đơn giản nhưng mạnh. Register, unregister, lookup, filter. Mọi tool — built-in, discovered, MCP — đều implement cùng interface. Polymorphism tại runtime.
+**2. Registry pattern**: Một `Map<string, Tool>` đơn giản nhưng mạnh. Register, unregister, lookup, filter. Mọi tool  -  built-in, discovered, MCP  -  đều implement cùng interface. Polymorphism tại runtime.
 
 **3. Discriminated decision**: `ForcedToolDecision = 'allow' | 'deny' | 'ask_user'`. Ba giá trị rõ ràng, exhaustively handled. Không có `null` hay `undefined` gây bug.
 
@@ -267,4 +267,4 @@ Tool system của Gemini CLI dạy bạn 4 pattern thiết kế:
 
 ## Điều cần giữ lại
 
-Tool system là phần code đáng đọc nhất trong Gemini CLI. Nó cho thấy cách TypeScript generic và discriminated union tạo nên type-safe plugin system. Builder + Registry + Policy là bộ ba pattern bạn sẽ lặp lại trong mọi AI agent. Khi xây tool system riêng, hãy bắt đầu từ interface `ToolInvocation` — nó định nghĩa contract mà mọi tool phải tuân theo.
+Tool system là phần code đáng đọc nhất trong Gemini CLI. Nó cho thấy cách TypeScript generic và discriminated union tạo nên type-safe plugin system. Builder + Registry + Policy là bộ ba pattern bạn sẽ lặp lại trong mọi AI agent. Khi xây tool system riêng, hãy bắt đầu từ interface `ToolInvocation`  -  nó định nghĩa contract mà mọi tool phải tuân theo.

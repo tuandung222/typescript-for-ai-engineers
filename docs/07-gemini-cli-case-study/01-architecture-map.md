@@ -117,7 +117,7 @@ Gemini CLI dùng ESM hoàn toàn. Mọi `import` phải có extension `.js` (dù
 }
 ```
 
-Gemini CLI dùng `.tsx` không phải cho browser mà cho terminal. React + Ink render React component thành terminal output. Đây là ví dụ tuyệt vời rằng JSX không gắn liền với DOM — nó chỉ là syntax cho component tree, renderer có thể là bất cứ thứ gì.
+Gemini CLI dùng `.tsx` không phải cho browser mà cho terminal. React + Ink render React component thành terminal output. Đây là ví dụ tuyệt vời rằng JSX không gắn liền với DOM  -  nó chỉ là syntax cho component tree, renderer có thể là bất cứ thứ gì.
 
 ### npm workspaces (không phải pnpm)
 
@@ -154,4 +154,4 @@ Câu trả lời khác nhau hoàn toàn vì domain khác nhau. Docmost build Doc
 
 ## Điều cần giữ lại
 
-Gemini CLI cho thấy TypeScript không chỉ cho web app. Nó xây được AI agent production với agent loop, tool registry, plugin system và terminal UI — tất cả type-safe, tất cả strict mode, tất cả ESM. Bản đồ kiến trúc ở đây sẽ là reference khi bạn đọc sâu từng lớp ở các bài tiếp theo.
+Gemini CLI cho thấy TypeScript không chỉ cho web app. Nó xây được AI agent production với agent loop, tool registry, plugin system và terminal UI  -  tất cả type-safe, tất cả strict mode, tất cả ESM. Bản đồ kiến trúc ở đây sẽ là reference khi bạn đọc sâu từng lớp ở các bài tiếp theo.

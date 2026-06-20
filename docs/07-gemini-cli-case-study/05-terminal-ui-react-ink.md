@@ -4,11 +4,11 @@ title: 7.5 Terminal UI với React và Ink
 
 # 7.5 Terminal UI với React và Ink
 
-Gemini CLI dùng React — nhưng không phải cho browser. Nó dùng **Ink**, một framework render React component ra terminal output thay vì DOM. Nếu bạn nghĩ React chỉ dành cho web, bài này sẽ thay đổi cách nhìn. JSX chỉ là syntax cho component tree; renderer có thể là bất cứ thứ gì.
+Gemini CLI dùng React  -  nhưng không phải cho browser. Nó dùng **Ink**, một framework render React component ra terminal output thay vì DOM. Nếu bạn nghĩ React chỉ dành cho web, bài này sẽ thay đổi cách nhìn. JSX chỉ là syntax cho component tree; renderer có thể là bất cứ thứ gì.
 
 ## Ink là gì?
 
-Ink là thư viện cho phép viết CLI app bằng React component. Nó dùng **Yoga** (Flexbox layout engine của Facebook) để tính layout, rồi render ra ANSI escape code lên terminal. Bạn viết `<Box>`, `<Text>`, `<Box flexDirection="column">` — Ink chuyển thành terminal output với màu sắc, padding, spacing.
+Ink là thư viện cho phép viết CLI app bằng React component. Nó dùng **Yoga** (Flexbox layout engine của Facebook) để tính layout, rồi render ra ANSI escape code lên terminal. Bạn viết `<Box>`, `<Text>`, `<Box flexDirection="column">`  -  Ink chuyển thành terminal output với màu sắc, padding, spacing.
 
 ```tsx
 // Ví dụ Ink đơn giản
@@ -25,14 +25,14 @@ const App = () => (
 render(<App />);
 ```
 
-Điểm khác biệt với React web: không có DOM, không có `document`, không có browser event. Thay vào đó, Ink lắng nghe stdin cho keypress, dùng Yoga cho layout, và ANSI code cho rendering. Nhưng mental model giống hệt: component, props, state, hooks, context — tất cả đều hoạt động.
+Điểm khác biệt với React web: không có DOM, không có `document`, không có browser event. Thay vào đó, Ink lắng nghe stdin cho keypress, dùng Yoga cho layout, và ANSI code cho rendering. Nhưng mental model giống hệt: component, props, state, hooks, context  -  tất cả đều hoạt động.
 
 ## Entry point: `gemini.tsx` (974 dòng)
 
-File `packages/cli/src/gemini.tsx` là entry point của CLI. Nó là file `.tsx` — đúng vậy, file TypeScript JSX nhưng chạy trên Node.js, không phải browser. Nhiệm vụ chính:
+File `packages/cli/src/gemini.tsx` là entry point của CLI. Nó là file `.tsx`  -  đúng vậy, file TypeScript JSX nhưng chạy trên Node.js, không phải browser. Nhiệm vụ chính:
 
 ```typescript
-// gemini.tsx — import từ @google/gemini-cli-core
+// gemini.tsx  -  import từ @google/gemini-cli-core
 import {
   type Config,
   AuthType,
@@ -96,7 +96,7 @@ export async function startInteractiveUI(config, settings, ...) {
 }
 ```
 
-`render()` từ Ink nhận JSX và bắt đầu render loop. `waitUntilExit()` trả về Promise resolve khi user thoát app. Đây là async/await pattern kết hợp với React render — rất TypeScript.
+`render()` từ Ink nhận JSX và bắt đầu render loop. `waitUntilExit()` trả về Promise resolve khi user thoát app. Đây là async/await pattern kết hợp với React render  -  rất TypeScript.
 
 ### Component tree
 
@@ -135,7 +135,7 @@ flowchart TB
 - Session management
 
 ```typescript
-// AppContainer.tsx — hooks usage
+// AppContainer.tsx  -  hooks usage
 import { useMemo, useState, useCallback, useEffect, useRef, useLayoutEffect, useContext } from 'react';
 import { useApp, useStdout, useStdin } from 'ink';
 ```
@@ -188,7 +188,7 @@ AppContainer wrap app trong nhiều Context Provider:
 </SettingsContext.Provider>
 ```
 
-Đây là standard React pattern: context cho dependency injection. Mỗi provider cung cấp data hoặc behavior cho subtree. `VimModeProvider` cho Vim keybinding, `ScrollProvider` cho scrollback, `MouseProvider` cho mouse event handling — tất cả trong terminal.
+Đây là standard React pattern: context cho dependency injection. Mỗi provider cung cấp data hoặc behavior cho subtree. `VimModeProvider` cho Vim keybinding, `ScrollProvider` cho scrollback, `MouseProvider` cho mouse event handling  -  tất cả trong terminal.
 
 ## UI components
 
@@ -229,7 +229,7 @@ ui/
     # Color themes
 ```
 
-Mỗi component đều là `.tsx` — TypeScript JSX. Mỗi component test bằng `.test.tsx`. Pattern giống hệt React web app, chỉ khác renderer.
+Mỗi component đều là `.tsx`  -  TypeScript JSX. Mỗi component test bằng `.test.tsx`. Pattern giống hệt React web app, chỉ khác renderer.
 
 ## Non-interactive mode
 
@@ -244,7 +244,7 @@ export async function runNonInteractive(params: RunNonInteractiveParams) {
 }
 ```
 
-Non-interactive mode dùng cho CI/CD, scripting, hoặc pipe input/output. Nó không render React — thay vào đó, nó subscribe trực tiếp vào event stream và format output.
+Non-interactive mode dùng cho CI/CD, scripting, hoặc pipe input/output. Nó không render React  -  thay vào đó, nó subscribe trực tiếp vào event stream và format output.
 
 Hai mode chia sẻ cùng core logic (agent loop, tool system, scheduler). Chỉ UI layer khác nhau. Đây là lý do kiến trúc tách core khỏi CLI: **cùng một core, nhiều renderer**.
 
@@ -261,7 +261,7 @@ Hai mode chia sẻ cùng core logic (agent loop, tool system, scheduler). Chỉ 
 | **Routing** | React Router | Không cần (single view) |
 | **File type** | `.tsx` | `.tsx` |
 
-Điểm mấu chốt: JSX không phải "React DOM syntax". JSX là syntax extension cho JavaScript, compile thành `React.createElement()` calls. React core chỉ là virtual DOM reconciler — nó diff virtual tree rồi apply changes vào renderer. DOM renderer tạo HTML element, Ink renderer tạo ANSI escape code.
+Điểm mấu chốt: JSX không phải "React DOM syntax". JSX là syntax extension cho JavaScript, compile thành `React.createElement()` calls. React core chỉ là virtual DOM reconciler  -  nó diff virtual tree rồi apply changes vào renderer. DOM renderer tạo HTML element, Ink renderer tạo ANSI escape code.
 
 ## Pattern cho AI engineer
 
@@ -275,4 +275,4 @@ Gemini CLI chọn option 3 vì UI phức tạp: streaming text, tool call visual
 
 ## Điều cần giữ lại
 
-React + Ink cho thấy component model không giới hạn ở browser. Terminal cũng là rendering target. JSX, hooks, context, provider pattern — tất cả hoạt động như cũ. Khi bạn thấy `.tsx` trong codebase Node.js, đừng nghĩ "web app" — hãy nghĩ "component tree" và tìm renderer. Trong Gemini CLI, renderer là Ink, và nó tạo ra terminal UI production-grade với accessibility, theming, và responsive layout.
+React + Ink cho thấy component model không giới hạn ở browser. Terminal cũng là rendering target. JSX, hooks, context, provider pattern  -  tất cả hoạt động như cũ. Khi bạn thấy `.tsx` trong codebase Node.js, đừng nghĩ "web app"  -  hãy nghĩ "component tree" và tìm renderer. Trong Gemini CLI, renderer là Ink, và nó tạo ra terminal UI production-grade với accessibility, theming, và responsive layout.

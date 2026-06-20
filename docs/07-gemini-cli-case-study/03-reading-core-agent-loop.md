@@ -28,7 +28,7 @@ export * from './hooks/types.js';
 // ... ~300 dòng re-export khác
 ```
 
-Khi bạn thấy một file `index.ts` re-export hàng trăm module, đó là dấu hiệu của package lớn có nhiều consumer khác nhau. CLI import từ `@google/gemini-cli-core` và lấy đúng những gì nó cần. SDK cũng vậy nhưng dùng subset khác. Pattern này gọi là **barrel file** — một file duy nhất gom tất cả export lại, giúp consumer không cần biết structure bên trong.
+Khi bạn thấy một file `index.ts` re-export hàng trăm module, đó là dấu hiệu của package lớn có nhiều consumer khác nhau. CLI import từ `@google/gemini-cli-core` và lấy đúng những gì nó cần. SDK cũng vậy nhưng dùng subset khác. Pattern này gọi là **barrel file**  -  một file duy nhất gom tất cả export lại, giúp consumer không cần biết structure bên trong.
 
 ## Event type: Discriminated union cho agent stream
 
@@ -107,7 +107,7 @@ for await (const event of agentLoop.run()) {
 }
 ```
 
-TypeScript bắt bạn xử lý mọi case (nếu dùng `exhaustive switch`), giúp không bỏ sót event type. Đây là lợi thế lớn nhất của TypeScript khi làm AI agent so với Python — bạn biết compile time rằng mình đã xử lý hết mọi loại event chưa.
+TypeScript bắt bạn xử lý mọi case (nếu dùng `exhaustive switch`), giúp không bỏ sót event type. Đây là lợi thế lớn nhất của TypeScript khi làm AI agent so với Python  -  bạn biết compile time rằng mình đã xử lý hết mọi loại event chưa.
 
 ## Content generator: Streaming từ Gemini API
 
@@ -208,7 +208,7 @@ messageBus.subscribe(
 );
 ```
 
-Pattern ở đây là **event-driven architecture**: scheduler không gọi UI trực tiếp. Nó publish event lên message bus, UI subscribe và respond. Điều này giúp core không phụ thuộc vào CLI — cùng core đó có thể chạy với SDK (headless) mà không cần terminal UI.
+Pattern ở đây là **event-driven architecture**: scheduler không gọi UI trực tiếp. Nó publish event lên message bus, UI subscribe và respond. Điều này giúp core không phụ thuộc vào CLI  -  cùng core đó có thể chạy với SDK (headless) mà không cần terminal UI.
 
 ## Agent session: Orchestration ở tầng cao hơn
 
@@ -233,7 +233,7 @@ export class AgentSession implements AgentProtocol {
 }
 ```
 
-`sendStream` là phương thức chính mà CLI và SDK dùng. Nó nhận prompt, gửi đến agent, và trả về AsyncIterable yield từng event. AsyncIterable là pattern TypeScript-native cho stream — không cần thư viện ngoài, `for await...of` hoạt động trực tiếp.
+`sendStream` là phương thức chính mà CLI và SDK dùng. Nó nhận prompt, gửi đến agent, và trả về AsyncIterable yield từng event. AsyncIterable là pattern TypeScript-native cho stream  -  không cần thư viện ngoài, `for await...of` hoạt động trực tiếp.
 
 ## Luồng chạy tổng hợp
 
@@ -269,4 +269,4 @@ Luồng chạy:
 
 ## Điều cần giữ lại
 
-Agent loop của Gemini CLI dùng 3 pattern TypeScript quan trọng: **discriminated union** cho event type, **AsyncIterable** cho streaming, và **message bus** cho event-driven communication giữa core và UI. Ba pattern này xuất hiện trong hầu hết AI agent production system. Khi bạn xây AI agent riêng, hãy bắt đầu từ discriminated union event type — nó sẽ hướng dẫn toàn bộ architecture còn lại.
+Agent loop của Gemini CLI dùng 3 pattern TypeScript quan trọng: **discriminated union** cho event type, **AsyncIterable** cho streaming, và **message bus** cho event-driven communication giữa core và UI. Ba pattern này xuất hiện trong hầu hết AI agent production system. Khi bạn xây AI agent riêng, hãy bắt đầu từ discriminated union event type  -  nó sẽ hướng dẫn toàn bộ architecture còn lại.
